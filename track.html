@@ -9,18 +9,29 @@
 </head>
 <body>
   <div class="container">
-    <h1>🔔 ติดตามผล</h1>
-    <p>หน้านี้สามารถใช้ติดตามสถานะการเพาะปลูกหรือผลผลิตของเกษตรกร</p>
+  <h1>🔔 ติดตามผล</h1>
+  <div id="farmerList"></div>
+</div>
 
-    <div class="card">
-      🌱 <strong>นายสมชาย</strong> - ข้าวโพด <br>
-      สถานะ: กำลังเพาะปลูก
-    </div>
-    <div class="card">
-      🌾 <strong>นางสมศรี</strong> - ข้าวหอมมะลิ <br>
-      สถานะ: เก็บเกี่ยวแล้ว
-    </div>
-  </div>
+<script>
+fetch("https://script.google.com/macros/s/AKfycbx6DaNh5fhG26I7yi8XMi8k00VzKiaYtGHDmJpaM6XAM5X5H3dRNkeh_-330ey32_N7/exec")
+  .then(res => res.json())
+  .then(data => {
+    let list = document.getElementById("farmerList");
+    list.innerHTML = "";
+    data.forEach(f => {
+      list.innerHTML += `
+        <div class="card">
+          👤 <strong>${f.name}</strong> <br>
+          อายุ: ${f.age} <br>
+          ที่อยู่: ${f.address} <br>
+          เบอร์โทร: ${f.phone}
+        </div>
+      `;
+    });
+  });
+</script>
+
 
   <!-- Bottom Nav -->
   <div class="navbar">

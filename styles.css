@@ -9,7 +9,7 @@ body {
   max-width: 600px;
   margin: 20px auto 80px; /* เว้นที่ด้านล่างให้ Navbar */
   background: #fff;
-  padding: 20px;
+  padding: 60px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }

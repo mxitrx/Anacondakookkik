@@ -8,23 +8,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- รองรับมือถือ -->
 </head>
 <body>
-    <h2>รายการเกษตรกร</h2>
-    <div id="farmerList"></div>
-    <form action="save_farmer.php" method="POST">
-        <label>ชื่อเกษตรกร:</label>
-        <input type="text" name="name" required>
+    <div class="container">
+      <h2>รายการเกษตรกร</h2>
+    <form id="farmerForm">
+  <label>ชื่อเกษตรกร:</label>
+  <input type="text" name="name" required>
+  <label>อายุ:</label>
+  <input type="number" name="age" required>
+  <label>ที่อยู่:</label>
+  <input type="text" name="address" required>
+  <label>เบอร์โทร:</label>
+  <input type="text" name="phone" required>
+  <button type="submit">บันทึกข้อมูล</button>
+</form>
 
-        <label>อายุ:</label>
-        <input type="number" name="age" required>
+<script>
+  document.getElementById("farmerForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    
+    let data = {
+      name: this.name.value,
+      age: this.age.value,
+      address: this.address.value,
+      phone: this.phone.value
+    };
 
-        <label>ที่อยู่:</label>
-        <input type="text" name="address" required>
+    fetch("https://script.google.com/macros/s/AKfycbx6DaNh5fhG26I7yi8XMi8k00VzKiaYtGHDmJpaM6XAM5X5H3dRNkeh_-330ey32_N7/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(txt => alert("บันทึกสำเร็จ!"))
+    .catch(err => alert("Error: " + err));
+  });
+</script>
 
-        <label>เบอร์โทร:</label>
-        <input type="text" name="phone" required>
-
-        <button type="submit">บันทึกข้อมูล</button>
-    </form>
 
   </div>
 
