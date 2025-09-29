@@ -1,0 +1,114 @@
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto 80px; /* เว้นที่ด้านล่างให้ Navbar */
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #2C3E50;
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  background: #16a085;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1abc9c;
+}
+
+#farmerList {
+  margin-top: 20px;
+}
+
+.card {
+  background: #f6f6f6;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+/* ✅ Bottom Navigation */
+.navbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #2c3e50;
+  border-top: 1px solid #ccc;
+  z-index: 999;
+}
+
+.navbar a {
+  flex: 1;
+  text-align: center;
+  color: #bdc3c7;
+  text-decoration: none;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.navbar a span {
+  font-size: 12px;
+}
+
+.navbar a.active,
+.navbar a:hover {
+  color: #1abc9c;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 10px auto 80px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

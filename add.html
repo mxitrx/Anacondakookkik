@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ระบบเก็บข้อมูลเกษตรกร</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- รองรับมือถือ -->
+</head>
+<body>
+    <h2>รายการเกษตรกร</h2>
+    <div id="farmerList"></div>
+    <form action="save_farmer.php" method="POST">
+        <label>ชื่อเกษตรกร:</label>
+        <input type="text" name="name" required>
+
+        <label>อายุ:</label>
+        <input type="number" name="age" required>
+
+        <label>ที่อยู่:</label>
+        <input type="text" name="address" required>
+
+        <label>เบอร์โทร:</label>
+        <input type="text" name="phone" required>
+
+        <button type="submit">บันทึกข้อมูล</button>
+    </form>
+
+  </div>
+
+  <!-- แถบเมนูด้านล่าง -->
+  <div class="navbar">
+    <a href="index.html" class="active">🏠<span>หน้าหลัก</span></a>
+    <a href="add.html">➕<span>เพิ่ม</span></a>
+    <a href="track.html">🔔<span>ติดตาม</span></a>
+    <a href="profile.html">👤<span>โปรไฟล์</span></a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
