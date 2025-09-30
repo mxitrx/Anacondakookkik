@@ -2,19 +2,62 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>ระบบเก็บข้อมูลเกษตรกร</title>
+  <title>E-Farmbook by Anacondakookik</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- รองรับมือถือ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .welcome-box {
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    .quick-btn {
+      padding: 15px;
+      border-radius: 10px;
+      background: #1abc9c;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .quick-btn:hover {
+      background: #16a085;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Anacondakookkik Welcome!</h1>
+    <h1>🌾 ยินดีต้อนรับสู่แอปของเรา!</h1>
     <img src="image/cat.gif" alt="cat" width="350" style="border-radius:10%; margin:10px 0; display:block; margin-left:auto; margin-right:auto;">
-    <img src="image/donkey.gif" alt="donkey" width="350" style="border-radius:10%; margin:10px 0; display:block; margin-left:auto; margin-right:auto;">
+
+    <div class="welcome-box">
+      <p>แอปพลิเคชันนี้ถูกพัฒนาเพื่อช่วยเก็บข้อมูลเกษตรกร 📊  
+      คุณสามารถ <strong>เพิ่มข้อมูล</strong> ของเกษตรกร,  
+      <strong>ติดตามผลผลิต</strong> 🌱 และ <strong>แก้ไขโปรไฟล์</strong> ของคุณได้ง่าย ๆ</p>
+    </div>
+
+    <div class="quick-actions">
+      <a href="add.html" class="quick-btn">➕ เพิ่มข้อมูล</a>
+      <a href="track.html" class="quick-btn">🔔 ติดตามผล</a>
+      <a href="profile.html" class="quick-btn">👤 โปรไฟล์</a>
+      <a href="https://script.google.com" target="_blank" class="quick-btn">⚙️ จัดการ API</a>
+    </div>
   </div>
 
-  <!-- แถบเมนูด้านล่าง -->
+  <audio controls autoplay loop style="width:100%; margin-top:20px;">
+  <source src="music.ogg" type="audio/ogg">
+</audio>
+
   <div class="navbar">
     <a href="index.html" class="active">🏠<span>หน้าหลัก</span></a>
     <a href="add.html">➕<span>เพิ่ม</span></a>
