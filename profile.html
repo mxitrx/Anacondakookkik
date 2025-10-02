@@ -7,21 +7,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- รองรับมือถือ -->
 </head>
+
+<!-- ปุ่มย้อนกลับ -->
+  <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
+  
 <body>
-  <div class="container" style="text-align:center;">
-    <h2>โปรไฟล์</h2>
-    <img src="image/pic.jpg" alt="รูปโปรไฟล์" width="350" style="border-radius:10%; margin:10px 0;">
-    <p><strong>👤 ชื่อผู้ใช้:</strong> Anacondakookkik</p>
-    <p><strong>📧 Email:</strong> Anacondakookkik@kmitl.ac.th</p>
-    <p><strong>📞 Phone:</strong> 099-999-9999</p>
-    
+  <div class="container profile-box">
+    <div class="profile-content">
+      <img src="image/pic.jpg" alt="รูปโปรไฟล์" class="profile-pic">
+      <div class="profile-info">
+        <p><strong>ชื่อ - นามสกุล:</strong> Anacondakookkik</p>
+        <p><strong>ขึ้นทะเบียน:</strong> วันที่ 1 ตุลาคม</p>
+        <p><strong>อีเมล:</strong> Anacondakookkik@kmitl.ac.th</p>
+        <p><strong>โทรศัพท์:</strong> 012-345-6789</p>
+      </div>
+    </div>
   </div>
+
 
   <div class="navbar">
     <a href="index.html">🏠<span>หน้าหลัก</span></a>
     <a href="add.html">➕<span>เพิ่ม</span></a>
     <a href="track.html">🔔<span>ติดตาม</span></a>
-    <a href="profile.html" class="active">👤<span>โปรไฟล์</span></a>
+    <a href="profile.html" class="active">👤<span>ติดต่อเรา</span></a>
   </div>
 </body>
 </html>

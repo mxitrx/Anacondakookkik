@@ -7,42 +7,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- รองรับมือถือ -->
 </head>
+
+<!-- ปุ่มย้อนกลับ -->
+  <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
+  
 <body>
     <div class="container">
       <h2>รายการเกษตรกร</h2>
     <form id="farmerForm">
-  <label>ชื่อเกษตรกร:</label>
+  <label>ชื่อ - นามสกุล:</label>
   <input type="text" name="name" required>
-  <label>อายุ:</label>
-  <input type="text" name="age" required>
+  
   <label>ที่อยู่:</label>
   <input type="text" name="address" required>
+
   <label>เบอร์โทร:</label>
   <input type="text" name="phone" required>
+
+  <label>อีเมล:</label>
+  <input type="text" name="email" required>
+
+  <label>พื้นที่ปลูก:</label>
+  <input type="text" name="area" required>
+
+  <label>ประเภทที่ปลูก:</label>
+  <input type="text" name="type" required>
+
+  <label>วันที่ปลูก:</label>
+  <input type="date" name="day" required>
+
+  <label>วันที่คาดว่าจะเก็บเกี่ยว:</label>
+  <input type="number" name="number" required>
+
   <button type="submit">บันทึกข้อมูล</button>
 </form>
-
-<script>
-  document.getElementById("farmerForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    
-    let data = {
-      name: this.name.value,
-      age: this.age.value,
-      address: this.address.value,
-      phone: this.phone.value
-    };
-
-    fetch("https://script.google.com/macros/s/AKfycbx6DaNh5fhG26I7yi8XMi8k00VzKiaYtGHDmJpaM6XAM5X5H3dRNkeh_-330ey32_N7/exec", {
-      method: "POST",
-      body: JSON.stringify(data)
-    })
-    .then(res => res.text())
-    .then(txt => alert("บันทึกสำเร็จ!"))
-    .catch(err => alert("Error: " + err));
-  });
-</script>
-
 
   </div>
 
@@ -51,7 +49,7 @@
     <a href="index.html">🏠<span>หน้าหลัก</span></a>
     <a href="add.html" class="active">➕<span>เพิ่ม</span></a>
     <a href="track.html">🔔<span>ติดตาม</span></a>
-    <a href="profile.html">👤<span>โปรไฟล์</span></a>
+    <a href="profile.html">👤<span>ติดต่อเรา</span></a>
   </div>
 
   <script src="script.js"></script>

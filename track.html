@@ -7,6 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
+<!-- ปุ่มย้อนกลับ -->
+  <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
+
 <body>
   <div class="container">
     <h1>🔔 ติดตามผล</h1>
@@ -17,31 +21,8 @@
     <a href="index.html">🏠<span>หน้าหลัก</span></a>
     <a href="add.html">➕<span>เพิ่ม</span></a>
     <a href="track.html" class="active">🔔<span>ติดตาม</span></a>
-    <a href="profile.html">👤<span>โปรไฟล์</span></a>
+    <a href="profile.html">👤<span>ติดต่อเรา</span></a>
   </div>
 
-  <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbx6DaNh5fhG26I7yi8XMi8k00VzKiaYtGHDmJpaM6XAM5X5H3dRNkeh_-330ey32_N7/exec"; // ✅ เปลี่ยนเป็น URL จริง
-
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => {
-        let list = document.getElementById("farmerList");
-        list.innerHTML = "";
-        data.forEach(f => {
-          list.innerHTML += `
-            <div class="card">
-              👤 <strong>${f.name}</strong><br>
-              อายุ: ${f.age}<br>
-              ที่อยู่: ${f.address}<br>
-              เบอร์โทร: ${f.phone}
-            </div>
-          `;
-        });
-      })
-      .catch(err => {
-        document.getElementById("farmerList").innerHTML = "❌ โหลดข้อมูลไม่สำเร็จ";
-      });
-  </script>
 </body>
 </html>
