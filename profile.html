@@ -10,20 +10,32 @@
 
 <!-- ปุ่มย้อนกลับ -->
   <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
-  
-<body>
+
+<div>
   <div class="container profile-box">
     <div class="profile-content">
       <img src="image/pic.jpg" alt="รูปโปรไฟล์" class="profile-pic">
       <div class="profile-info">
         <p><strong>ชื่อ - นามสกุล:</strong> Anacondakookkik</p>
-        <p><strong>ขึ้นทะเบียน:</strong> วันที่ 1 ตุลาคม</p>
+        <p><strong>ขึ้นทะเบียน:</strong> วันที่ 1 ตุลาคม 2568</p>
         <p><strong>อีเมล:</strong> Anacondakookkik@kmitl.ac.th</p>
         <p><strong>โทรศัพท์:</strong> 012-345-6789</p>
       </div>
     </div>
   </div>
+  
+ <div class="containerinfo" style="margin-top: 20px; text-align: center;">
+    <form id="profile-info-form">
+    <label style="color: white;">ชื่อ - นามสกุล:</label>
+    <input type="text" name="name" required style="background-color: #c9ff00;">
+  
+    <label style="color:white;">อีเมล:</label>
+    <input type="text" name="email" required style="background-color: #c9ff00;">
 
+    <label style="color:white;">เบอร์โทร:</label>
+    <input type="text" name="phone" required style="background-color: #c9ff00;">
+    </form>
+  </div>
 
   <div class="navbar">
     <a href="index.html">🏠<span>หน้าหลัก</span></a>
