@@ -157,4 +157,8 @@ button:hover {
   line-height: 20px;
   
 }
+.placeholder {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 15px;
 
+}

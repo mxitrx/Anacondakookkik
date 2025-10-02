@@ -12,32 +12,35 @@
   <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
   
 <body>
-    <div class="container">
-      <h2>เพิ่มรายชื่อเกษตรกร - ปลูก</h2>
+    <div class="container" >
+      <h2>เพิ่มรายชื่อและที่ดินของคุณ</h2>
     <form id="farmerForm">
   <label>ชื่อ - นามสกุล:</label>
-  <input type="text" name="name" required>
+  <input type="text" name="name" required placeholder="เช่น อิทธิฤทธิ์ กุนศิริ">
   
   <label>ที่อยู่:</label>
-  <input type="text" name="address" required>
+  <input type="text" name="address" required placeholder="เช่น หนองใหญ่ ชลบุรี">
 
   <label>เบอร์โทร:</label>
-  <input type="text" name="phone" required>
+  <input type="text" name="phone" required placeholder="เช่น 012-345-6789">
 
   <label>อีเมล:</label>
-  <input type="text" name="email" required>
+  <input type="text" name="email" required placeholder="เช่น Anacondakookkik">
 
   <label>พื้นที่ปลูก:</label>
-  <input type="text" name="area" required>
+  <input type="text" name="area" required placeholder="เช่น 20 ไร่">
 
   <label>ประเภทที่ปลูก:</label>
-  <input type="text" name="type" required>
+  <input type="text" name="type" required placeholder="เช่น ข้าว">
 
   <label>วันที่ปลูก:</label>
   <input type="date" name="day" required>
 
   <label>วันที่คาดว่าจะเก็บเกี่ยว:</label>
-  <input type="number" name="number" required>
+  <input type="date" name="day" required >
+
+  <label>แนบรูปภาพ:</label>
+  <input type="file" id="myFile" name="filename">
 
   <button type="submit">บันทึกข้อมูล</button>
 </form>
