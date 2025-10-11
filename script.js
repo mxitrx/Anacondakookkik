@@ -1,41 +1,33 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("farmerForm");
-  const list = document.getElementById("farmerList");
+// script.js
 
-  // โหลดข้อมูลตอนเปิดเว็บ
-  loadFarmers();
+// ใส่ URL ของ Google Apps Script ที่คัดลอกมาตรงนี้
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxSTGUWJ5RNfhbbsmjlrrjxAB7hfMSoMuwZkwd1j5pCOxBvfEPceXBpzZCZtEwulZwj/exec'; 
+const form = document.getElementById('farmerForm');
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+form.addEventListener('submit', e => {
+  e.preventDefault(); // ป้องกันไม่ให้ฟอร์มรีเฟรชหน้า
+  
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.textContent;
+  submitButton.disabled = true;
+  submitButton.textContent = 'กำลังบันทึก...';
 
-    const formData = new FormData(form);
+  const formData = new FormData(form);
 
-    fetch("save_farmer.php", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.text())
+  fetch(scriptURL, { method: 'POST', body: formData })
+    .then(response => response.json())
     .then(data => {
-      alert(data);
-      form.reset();
-      loadFarmers();
+      console.log('Success!', data);
+      alert('บันทึกข้อมูลสำเร็จ!');
+      form.reset(); // ล้างข้อมูลในฟอร์ม
+    })
+    .catch(error => {
+      console.error('Error!', error.message);
+      alert('เกิดข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้');
+    })
+    .finally(() => {
+      // คืนค่าปุ่มให้กลับมาเป็นปกติ
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
     });
-  });
-
-  function loadFarmers() {
-    fetch("list_farmer.php")
-      .then(res => res.json())
-      .then(data => {
-        list.innerHTML = "";
-        data.forEach(farmer => {
-          list.innerHTML += `
-            <div class="card">
-              <strong>${farmer.name}</strong> (${farmer.age} ปี)<br>
-              📍 ${farmer.address}<br>
-              📞 ${farmer.phone}
-            </div>
-          `;
-        });
-      });
-  }
 });
