@@ -2,28 +2,118 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>E-Farmbook by Anacondakookik</title>
+  <title>สมุดทะเบียน - E-Farmbook</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ทำให้ลิงก์ไม่มีขีดเส้นใต้และเป็นสีดำ */
+    .farmer-link {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
-
-<!-- ปุ่มย้อนกลับ -->
+<body>
   <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
 
-<body>
+  <div class="header">
+    <h1>📒 สมุดทะเบียน</h1>
+  </div>
+
   <div class="container">
-    <h1>🔔 ติดตามข้อมูล</h1>
-    <input type="text" style="float: right" placeholder="ค้นหา..">
-    <div id="farmerList">กำลังโหลดข้อมูล...</div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 ค้นหาชื่อเกษตรกร...">
+
+    <div id="farmerList">
+      
+      <a href="#" class="farmer-link" 
+         data-name="นาง สมพร ชลอุดมกุล"
+         data-img="image/somporn.jpg"
+         data-details='{
+           "ขึ้นทะเบียน": "16 กันยายน 2566",
+           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
+           "พืชที่ปลูก": "ข้าวหอมมะลิ",
+           "พื้นที่": "15 ไร่",
+           "เบอร์โทร": "089 884 4499",
+           "อีเมล": "-"
+         }'>
+        <div class="farmer-card">
+          <div class="card-avatar" style="background-image: url('image/somporn.jpg');"></div>
+          <div class="card-info">
+            <h3>นาง สมพร ชลอุดมกุล</h3>
+            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
+            <p><strong>พื้นที่:</strong> 15 ไร่</p>
+          </div>
+        </div>
+      </a>
+      
+      <a href="#" class="farmer-link"
+         data-name="อิทธิฤทธิ์ กุนศิริ"
+         data-img="" 
+         data-details='{
+           "ที่อยู่": "หนองใหญ่, ชลบุรี",
+           "พืชที่ปลูก": "ข้าวหอมมะลิ",
+           "พื้นที่": "20 ไร่",
+           "เบอร์โทร": "ไม่มีข้อมูล"
+         }'>
+        <div class="farmer-card">
+          <div class="card-avatar"></div>
+          <div class="card-info">
+            <h3>อิทธิฤทธิ์ กุนศิริ</h3>
+            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
+            <p><strong>พื้นที่:</strong> 20 ไร่</p>
+          </div>
+        </div>
+      </a>
+
+    </div>
   </div>
 
   <div class="navbar">
     <a href="index.html">🏠<span>หน้าหลัก</span></a>
-    <a href="add.html">➕<span>เพิ่ม</span></a>
-    <a href="track.html" class="active">🔔<span>ติดตาม</span></a>
+    <a href="add.html">➕<span>เพิ่มข้อมูล</span></a>
+    <a href="track.html" class="active">📒<span>สมุดทะเบียน</span></a>
     <a href="profile.html">👤<span>ติดต่อเรา</span></a>
   </div>
+
+  <script>
+    // --- ฟังก์ชันค้นหา (เหมือนเดิม) ---
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      let filter = this.value.toLowerCase();
+      let farmerList = document.getElementById('farmerList');
+      let links = farmerList.getElementsByClassName('farmer-link');
+      
+      for (let i = 0; i < links.length; i++) {
+        let link = links[i];
+        let nameElement = link.getElementsByTagName('h3')[0];
+        if (nameElement) {
+          let name = nameElement.textContent || nameElement.innerText;
+          if (name.toLowerCase().indexOf(filter) > -1) {
+            link.style.display = "block";
+          } else {
+            link.style.display = "none";
+          }
+        }
+      }
+    });
+
+    // --- ฟังก์ชันสร้างลิงก์และส่งข้อมูล ---
+    document.querySelectorAll('.farmer-link').forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // ป้องกันการรีเฟรชหน้า
+        
+        const name = this.dataset.name;
+        const img = this.dataset.img;
+        const details = this.dataset.details;
+        
+        // เข้ารหัสข้อมูลเพื่อส่งผ่าน URL
+        const url = `details.html?name=${encodeURIComponent(name)}&img=${encodeURIComponent(img)}&details=${encodeURIComponent(details)}`;
+        
+        // ไปยังหน้ารายละเอียด
+        window.location.href = url;
+      });
+    });
+  </script>
 
 </body>
 </html>

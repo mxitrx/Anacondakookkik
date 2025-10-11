@@ -8,7 +8,7 @@ body {
 .container {
   max-width: 600px;
   margin: 20px auto 80px; /* เว้นที่ด้านล่างให้ Navbar */
-  background: #fff;
+  background:  #222222;
   padding: 60px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -21,15 +21,23 @@ body {
   border-radius: 15px;
 }
 
-h1, h2 {
+h1{
   text-align: center;
-  color: #171717;
+  color: #C9FF00;
+}
+
+h2 {
+  text-align: center;
+  color: #C9FF00;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
 form label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
+  color: #C9FF00;
 }
 
 form input {
@@ -37,7 +45,8 @@ form input {
   padding: 10px;
   margin-top: 5px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
+  color: #222222;
 }
 
 button {
@@ -76,14 +85,14 @@ button:hover {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #C9FF00;
+  background: #222222;
   z-index: 999;
 }
 
 .navbar a {
   flex: 1;
   text-align: center;
-  color: #171717;
+  color: #fff;
   text-decoration: none;
   font-size: 22px;
   display: flex;
@@ -98,7 +107,7 @@ button:hover {
 
 .navbar a.active,
 .navbar a:hover {
-  color: #11ec2e;
+  color: #C9FF00;
 }
 
 /* ✅ Responsive */
@@ -119,6 +128,127 @@ button:hover {
   }
 }
 
+
+/* --- Profile Page Specifics --- */
+.profile-container {
+  display: flex;
+  flex-direction: column; /* จัดเรียงแนวตั้งสำหรับมือถือเป็นหลัก */
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.profile-pic-wrapper {
+  flex-shrink: 0;
+}
+
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%; /* ทำให้รูปเป็นวงกลม */
+  object-fit: cover;
+  border: 4px solid var(--primary-color, #C9FF00); /* ใช้สีหลัก หรือสีเขียวสำรอง */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.5em;
+  color: var(--primary-color, #C9FF00);
+  font-weight: bold;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  line-height: 1.6;
+  font-size: 1em;
+  color: #fff;
+  max-width: 400px;
+  word-wrap: break-word; /* แก้ไขข้อความยาวเกิน */
+}
+
+/* --- Responsive for larger screens --- */
+@media (min-width: 576px) {
+  .profile-container {
+    flex-direction: row; /* จัดเรียงแนวนอนสำหรับจอที่ใหญ่ขึ้น */
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+/* --- Styles for Track Page Cards --- */
+.search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-family: var(--font-family);
+  font-size: 1em;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+}
+
+.farmer-card {
+  display: flex;
+  align-items: center;
+  background-color: #f0f4f8; /* สีพื้นหลังการ์ดที่ดูสะอาดตา */
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.farmer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #bdc3c7; /* สีเทาสำหรับรูปโปรไฟล์เริ่มต้น */
+  margin-right: 20px;
+  flex-shrink: 0; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ไอคอนคนเริ่มต้น กรณีที่ยังไม่มีรูปภาพ */
+.card-avatar::before {
+    content: '👤';
+    font-size: 30px;
+    color: white;
+}
+
+.card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info h3 {
+  margin: 0 0 8px 0;
+  color: var(--secondary-color);
+  font-size: 1.2em;
+}
+
+.card-info p {
+  margin: 4px 0;
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
+}
 /* ปุ่มย้อนกลับซ้ายบน */
 .back-btn {
   position:static;
@@ -126,39 +256,16 @@ button:hover {
   font-family: 'Sarabun', sans-serif;
 }
 
-/* โปรไฟล์ box */
-.profile-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: #ffffff;
-}
-
-/* จัดรูป + ข้อมูลเป็นแถว */
-.profile-content {
-  display: flex;
-  align-items: right;
-  gap: 20px; /* ระยะห่างรูปกับข้อความ */
-}
-
-/* รูปโปรไฟล์ */
-.profile-pic {
-  width: 150px;
-  height: 170px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-/* ข้อมูลโปรไฟล์ */
-.profile-info p {
-  font-size: 15px;
+.welcome-box{
   color: #171717;
-  text-align: left;
-  line-height: 20px;
-  
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
-.placeholder {
-  font-family: 'Sarabun', sans-serif;
-  font-size: 15px;
 
+.welcome-box p{
+  color: #fff;
+  font-size: 18px;
 }
