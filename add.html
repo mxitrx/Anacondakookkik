@@ -6,6 +6,19 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #previewContainer {
+      margin-top: 10px;
+      text-align: center;
+    }
+    #previewImage {
+      max-width: 150px;
+      max-height: 150px;
+      display: none;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
   <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
@@ -43,6 +56,11 @@
       <label for="imageUpload">แนบรูปภาพโปรไฟล์:</label>
       <input type="file" id="imageUpload" name="filename" accept="image/*">
 
+      <!-- ✅ Preview Container -->
+      <div id="previewContainer">
+        <img id="previewImage" src="" alt="Preview">
+      </div>
+
       <div id="uploadStatus" class="welcome-box"><p>ยังไม่ได้อัปโหลดรูป</p></div>
 
       <button type="submit">บันทึกข้อมูล</button>
@@ -57,8 +75,24 @@
   </div>
 
   <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwlV4L-9RrejqvYz--RTFxiV4fjoXwKL_vqtURyrqUD9aTEjxwIMbabYmKCcBV5yyLp/exec"; // ✅ ใส่ URL จาก Apps Script
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxjV_3IrqVqVs_NdKrk2EJoA90QKOXEuOKhk0tP0M3sxAViq60IuPXf7KJ2b4DaCCoF/exec";
   const uploadStatus = document.getElementById("uploadStatus");
+  const previewImage = document.getElementById("previewImage");
+  const imageInput = document.getElementById("imageUpload");
+
+  // ✅ แสดง preview ทันทีเมื่อผู้ใช้เลือกรูป
+  imageInput.addEventListener("change", function () {
+    if (this.files && this.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        previewImage.src = e.target.result;
+        previewImage.style.display = "block";
+      };
+      reader.readAsDataURL(this.files[0]);
+    } else {
+      previewImage.style.display = "none";
+    }
+  });
 
   document.getElementById("farmerForm").addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -98,6 +132,7 @@
         uploadStatus.innerHTML = "<p style='color:#C9FF00;'>✅ อัปโหลดสำเร็จ!</p>";
         alert("บันทึกข้อมูลสำเร็จ!");
         form.reset();
+        previewImage.style.display = "none"; // ✅ รีเซ็ต preview
       } else {
         uploadStatus.innerHTML = "<p style='color:red;'>❌ อัปโหลดล้มเหลว: " + result.message + "</p>";
       }

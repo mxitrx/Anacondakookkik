@@ -280,3 +280,14 @@ button:hover {
   font-size: 18px;
 }
 
+#previewImage {
+  max-width: 200px;
+  max-height: 200px;
+  text-align: center;
+  object-fit: cover;
+  
+}
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+}
