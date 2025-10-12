@@ -224,12 +224,7 @@ button:hover {
   overflow: hidden;
 }
 
-/* ไอคอนคนเริ่มต้น กรณีที่ยังไม่มีรูปภาพ */
-.card-avatar::before {
-    content: '👤';
-    font-size: 30px;
-    color: white;
-}
+
 
 .card-avatar img {
   width: 100%;
@@ -269,3 +264,4 @@ button:hover {
   color: #fff;
   font-size: 18px;
 }
+

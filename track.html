@@ -2,157 +2,21 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>สมุดทะเบียน - E-Farmbook</title>
+  <title>📒 สมุดทะเบียนเกษตรกร</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* ทำให้ลิงก์ไม่มีขีดเส้นใต้และเป็นสีดำ */
-    .farmer-link {
-      text-decoration: none;
-      color: inherit;
-    }
-  </style>
 </head>
 <body>
   <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
 
   <div class="header">
-    <h1>📒 สมุดทะเบียน</h1>
+    <h1>📒 สมุดทะเบียนเกษตรกร</h1>
   </div>
 
   <div class="container">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 ค้นหาชื่อเกษตรกร...">
-
-    <div id="farmerList">
-      
-      <a href="#" class="farmer-link" 
-         data-name="นาง สมพร ชลอุดมกุล"
-         data-img="image/somporn.jpg"
-         data-details='{
-           "ขึ้นทะเบียน": "16 กันยายน 2566",
-           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
-           "พืชที่ปลูก": "ข้าวหอมมะลิ",
-           "พื้นที่": "15 ไร่",
-           "เบอร์โทร": "089 884 4499",
-           "อีเมล": "-"
-         }'>
-        <div class="farmer-card">
-          <div class="card-avatar" style="background-image: url('image/somporn.jpg');"></div>
-          <div class="card-info">
-            <h3>นาง สมพร ชลอุดมกุล</h3>
-            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
-            <p><strong>พื้นที่:</strong> 15 ไร่</p>
-          </div>
-        </div>
-      </a>
-      
-      <a href="#" class="farmer-link"
-         data-name="นาย อิทธิฤทธิ์ กุนศิริ"
-         data-img="image/mix.jpg" 
-         data-details='{
-           "ขึ้นทะเบียน": "16 กันยายน 2566",
-           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
-           "พืชที่ปลูก": "ข้าวหอมมะลิ",
-           "พื้นที่": "15 ไร่",
-           "เบอร์โทร": "089 884 4499",
-           "อีเมล": "-"
-         }'>
-        <div class="farmer-card">
-          <img src="image/mix.jpg" alt="รูปเกษตรกร" class="card-avatar">
-          <div class="card-info">
-            <h3>นาย อิทธิฤทธิ์ กุนศิริ</h3>
-            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
-            <p><strong>พื้นที่:</strong> 20 ไร่</p>
-          </div>
-        </div>
-      </a>
-       
-      <a href="#" class="farmer-link"
-         data-name="นาย วรพล ผลอินทร์"
-         data-img="image/dance.gif" 
-         data-details='{
-           "ขึ้นทะเบียน": "16 กันยายน 2566",
-           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
-           "พืชที่ปลูก": "ข้าวหอมมะลิ",
-           "พื้นที่": "15 ไร่",
-           "เบอร์โทร": "089 884 4499",
-           "อีเมล": "-"
-         }'>
-        <div class="farmer-card">
-          <img src="image/dance.gif" alt="รูปเกษตรกร" class="card-avatar">
-          <div class="card-info">
-            <h3>นาย วรพล ผลอินทร์</h3>
-            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
-            <p><strong>พื้นที่:</strong> 20 ไร่</p>
-          </div>
-        </div>
-      </a>
-      
-      <a href="#" class="farmer-link"
-         data-name="นางสาว นพอัปสร อ้นทอง"
-         data-img="image/dance.gif" 
-         data-details='{
-           "ขึ้นทะเบียน": "16 กันยายน 2566",
-           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
-           "พืชที่ปลูก": "ข้าวหอมมะลิ",
-           "พื้นที่": "15 ไร่",
-           "เบอร์โทร": "089 884 4499",
-           "อีเมล": "-"
-         }'>
-        <div class="farmer-card">
-          <img src="image/dance.gif" alt="รูปเกษตรกร" class="card-avatar">
-          <div class="card-info">
-            <h3>นางสาว นพอัปสร อ้นทอง</h3>
-            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
-            <p><strong>พื้นที่:</strong> 20 ไร่</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="farmer-link"
-         data-name="นางสาว พัชรนันท์ วิโรจน์ชีวัน"
-         data-img="image/dance.gif" 
-         data-details='{
-           "ขึ้นทะเบียน": "16 กันยายน 2566",
-           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
-           "พืชที่ปลูก": "ข้าวหอมมะลิ",
-           "พื้นที่": "15 ไร่",
-           "เบอร์โทร": "089 884 4499",
-           "อีเมล": "-"
-         }'>
-        <div class="farmer-card">
-          <img src="image/dance.gif" alt="รูปเกษตรกร" class="card-avatar">
-          <div class="card-info">
-            <h3>นางสาว พัชรนันท์ วิโรจน์ชีวัน</h3>
-            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
-            <p><strong>พื้นที่:</strong> 20 ไร่</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="farmer-link"
-         data-name="นาย  นนท์วริศ ภิญโญหิรัญรัตน์"
-         data-img="image/dance.gif" 
-         data-details='{
-           "ขึ้นทะเบียน": "16 กันยายน 2566",
-           "สถานที่": "ณ เกษตรอำเภอหนองใหญ่, จังหวัดชลบุรี",
-           "พืชที่ปลูก": "ข้าวหอมมะลิ",
-           "พื้นที่": "15 ไร่",
-           "เบอร์โทร": "089 884 4499",
-           "อีเมล": "-"
-         }'>
-        <div class="farmer-card">
-          <img src="image/dance.gif" alt="รูปเกษตรกร" class="card-avatar">
-          <div class="card-info">
-            <h3>นาย นนท์วริศ ภิญโญหิรัญรัตน์</h3>
-            <p><strong>พืชที่ปลูก:</strong> ข้าวหอมมะลิ</p>
-            <p><strong>พื้นที่:</strong> 20 ไร่</p>
-          </div>
-        </div>
-      </a>
-
-    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 พิมพ์ชื่อเกษตรกรที่ต้องการค้นหา...">
+    <div id="farmerList" class="farmer-list"></div>
   </div>
 
   <div class="navbar">
@@ -163,43 +27,57 @@
   </div>
 
   <script>
-    // --- ฟังก์ชันค้นหา (เหมือนเดิม) ---
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-      let filter = this.value.toLowerCase();
-      let farmerList = document.getElementById('farmerList');
-      let links = farmerList.getElementsByClassName('farmer-link');
-      
-      for (let i = 0; i < links.length; i++) {
-        let link = links[i];
-        let nameElement = link.getElementsByTagName('h3')[0];
-        if (nameElement) {
-          let name = nameElement.textContent || nameElement.innerText;
-          if (name.toLowerCase().indexOf(filter) > -1) {
-            link.style.display = "block";
-          } else {
-            link.style.display = "none";
-          }
-        }
-      }
+    const sheetId = "1En5DTNwTqVRQ_u1H7_LLJ-RZI8lYwtyOd7Tg9D9sioo"; 
+    const sheetName = "Data"; 
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+
+    let farmerData = [];
+
+    async function loadFarmers() {
+      const res = await fetch(url);
+      const text = await res.text();
+      const json = JSON.parse(text.substr(47).slice(0, -2));
+      farmerData = json.table.rows.map(row => ({
+        name: row.c[0]?.v || "-",
+        address: row.c[1]?.v || "-",
+        phone: row.c[2]?.v || "-",
+        email: row.c[3]?.v || "-",
+        area: row.c[4]?.v || "-",
+        cropType: row.c[5]?.v || "-",
+        plantingDate: row.c[6]?.v || "-",
+        harvestDate: row.c[7]?.v || "-",
+        image: row.c[8]?.v || "image/default.jpg"
+      }));
+      renderFarmers(farmerData);
+    }
+
+    function renderFarmers(data) {
+      const farmerList = document.getElementById("farmerList");
+      farmerList.innerHTML = data.map(f => `
+        <div class="farmer-card" onclick="openDetails('${encodeURIComponent(JSON.stringify(f))}')">
+          <div class="card-avatar">
+            ${f.image ? `<img src="${f.image}" alt="${f.name}">` : ""}
+          </div>
+          <div class="card-info">
+            <h3>${f.name}</h3>
+            <p><strong>พืช:</strong> ${f.cropType}</p>
+            <p><strong>พื้นที่:</strong> ${f.area} ไร่</p>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openDetails(data) {
+      window.location.href = `details.html?data=${data}`;
+    }
+
+    document.getElementById("searchInput").addEventListener("input", e => {
+      const q = e.target.value.toLowerCase();
+      renderFarmers(farmerData.filter(f => f.name.toLowerCase().includes(q)));
     });
 
-    // --- ฟังก์ชันสร้างลิงก์และส่งข้อมูล ---
-    document.querySelectorAll('.farmer-link').forEach(link => {
-      link.addEventListener('click', function(event) {
-        event.preventDefault(); // ป้องกันการรีเฟรชหน้า
-        
-        const name = this.dataset.name;
-        const img = this.dataset.img;
-        const details = this.dataset.details;
-        
-        // เข้ารหัสข้อมูลเพื่อส่งผ่าน URL
-        const url = `details.html?name=${encodeURIComponent(name)}&img=${encodeURIComponent(img)}&details=${encodeURIComponent(details)}`;
-        
-        // ไปยังหน้ารายละเอียด
-        window.location.href = url;
-      });
-    });
+    loadFarmers();
+    setInterval(loadFarmers, 60000);
   </script>
-
 </body>
 </html>

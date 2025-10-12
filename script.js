@@ -1,7 +1,7 @@
 // script.js
 
 // ใส่ URL ของ Google Apps Script ที่คัดลอกมาตรงนี้
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxSTGUWJ5RNfhbbsmjlrrjxAB7hfMSoMuwZkwd1j5pCOxBvfEPceXBpzZCZtEwulZwj/exec'; 
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyJravCY3bBdQUGlFX-RdZjintyhCf_3ZFO9WU9HdCifkzy5kaGQXjOteLytE_eeuTY/exec'; 
 const form = document.getElementById('farmerForm');
 
 form.addEventListener('submit', e => {

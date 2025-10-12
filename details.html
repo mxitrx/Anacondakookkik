@@ -1,108 +1,49 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <title>รายละเอียดเกษตรกร - E-Farmbook</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* CSS เพิ่มเติมสำหรับหน้ารายละเอียด */
-        .details-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .details-avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background-color: #bdc3c7;
-            margin: 0 auto 15px;
-            background-size: cover;
-            background-position: center;
-            border: 4px solid var(--primary-color, #27AE60);
-        }
-        .details-name {
-            font-size: 1.8em;
-            color: var(--primary-color, #27AE60);
-            margin: 0;
-        }
-        .details-table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse; /* ทำให้เส้นขอบติดกัน */
-        }
-        .details-table td {
-            padding: 12px 5px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .details-table td:first-child {
-            font-weight: bold;
-            color: #555;
-            width: 120px; /* กำหนดความกว้างของคอลัมน์หัวข้อ */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>👤 ข้อมูลเกษตรกร</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
+  <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
 
-    <div class="header">
-        <h1>📋 ข้อมูลเกษตรกร</h1>
-    </div>
+  <div class="header">
+    <h1>👤 ข้อมูลเกษตรกร</h1>
+  </div>
 
-    <div class="container" id="detailsContainer">
-        </div>
+  <div class="container profile-container" id="profileContainer"></div>
 
-    <div class="navbar">
-        <a href="index.html">🏠<span>หน้าหลัก</span></a>
-        <a href="add.html">➕<span>เพิ่มข้อมูล</span></a>
-        <a href="track.html" class="active">📒<span>สมุดทะเบียน</span></a>
-        <a href="profile.html">👤<span>ติดต่อเรา</span></a>
-    </div>
+  <div class="navbar">
+    <a href="index.html">🏠<span>หน้าหลัก</span></a>
+    <a href="add.html">➕<span>เพิ่มข้อมูล</span></a>
+    <a href="track.html" class="active">📒<span>สมุดทะเบียน</span></a>
+    <a href="profile.html">👤<span>ติดต่อเรา</span></a>
+  </div>
 
-    <script>
-        window.onload = function() {
-            // 1. ดึงข้อมูลจาก URL
-            const params = new URLSearchParams(window.location.search);
-            const name = params.get('name');
-            const img = params.get('img');
-            const detailsJson = params.get('details');
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const farmerData = JSON.parse(decodeURIComponent(params.get("data")));
 
-            const container = document.getElementById('detailsContainer');
+    const profileContainer = document.getElementById("profileContainer");
 
-            // 2. ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
-            if (!name || !detailsJson) {
-                container.innerHTML = '<p style="text-align:center;">ไม่พบข้อมูลเกษตรกร</p>';
-                return;
-            }
-
-            // 3. แปลงข้อมูล JSON กลับเป็น Object
-            const details = JSON.parse(detailsJson);
-
-            // 4. สร้าง HTML เพื่อแสดงผล
-            let detailsHtml = `
-                <div class="details-header">
-                    <div class="details-avatar" style="background-image: url('${img}');"></div>
-                    <h2 class="details-name">${name}</h2>
-                </div>
-                <table class="details-table">
-            `;
-
-            // วนลูปเพื่อสร้างตารางข้อมูลทั้งหมด
-            for (const key in details) {
-                detailsHtml += `
-                    <tr>
-                        <td>${key}</td>
-                        <td>${details[key]}</td>
-                    </tr>
-                `;
-            }
-
-            detailsHtml += '</table>';
-
-            // 5. นำ HTML ที่สร้างไปใส่ใน container
-            container.innerHTML = detailsHtml;
-        };
-    </script>
+    profileContainer.innerHTML = `
+      <div class="profile-pic-wrapper">
+        <img src="${farmerData.image}" alt="${farmerData.name}" class="profile-pic">
+      </div>
+      <div class="profile-info">
+        <h3>${farmerData.name}</h3>
+        <p><strong>ที่อยู่:</strong> ${farmerData.address}</p>
+        <p><strong>เบอร์โทร:</strong> ${farmerData.phone}</p>
+        <p><strong>อีเมล:</strong> ${farmerData.email}</p>
+        <p><strong>พื้นที่:</strong> ${farmerData.area} ไร่</p>
+        <p><strong>พืชที่ปลูก:</strong> ${farmerData.cropType}</p>
+        <p><strong>วันที่ปลูก:</strong> ${farmerData.plantingDate}</p>
+        <p><strong>วันที่คาดว่าจะเก็บเกี่ยว:</strong> ${farmerData.harvestDate}</p>
+      </div>
+    `;
+  </script>
 </body>
 </html>
