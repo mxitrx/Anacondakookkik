@@ -211,18 +211,33 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* --- Avatar Styling for Farmer Cards --- */
+
 .card-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background-color: #bdc3c7; /* สีเทาสำหรับรูปโปรไฟล์เริ่มต้น */
+  /* กำหนดขนาดและทำให้เป็นวงกลม */
+  width: 65px;
+  height: 65px;
+  border-radius: 50%; /* ทำให้เป็นวงกลม */
+  
+  /* การจัดการรูปภาพพื้นหลัง */
+  background-color: #bdc3c7; /* สีพื้นหลังเริ่มต้น (เทา) */
+  background-size: cover;      /* ทำให้รูปภาพเต็มพื้นที่โดยไม่เสียสัดส่วน */
+  background-position: center; /* จัดให้รูปภาพอยู่ตรงกลาง */
+  
+  /* การจัดวางและรายละเอียดอื่นๆ */
   margin-right: 20px;
-  flex-shrink: 0; 
+  flex-shrink: 0; /* ป้องกันไม่ให้ avatar หดตัวเมื่อข้อความยาว */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden; /* ซ่อนส่วนเกินของรูปภาพที่อยู่นอกวงกลม */
+  border: 2px solid #fff; /* เพิ่มขอบสีขาวเล็กน้อย */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* เพิ่มเงาเล็กน้อย */
 }
+
+/* ::before ใช้สำหรับสร้างไอคอนคนเริ่มต้น */
+/* ไอคอนนี้จะแสดงก็ต่อเมื่อไม่มีการกำหนด background-image */
+
 
 
 
