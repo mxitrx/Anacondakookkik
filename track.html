@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>📒 สมุดทะเบียนเกษตรกร</title>
+  <title>สมุดทะเบียนเกษตรกร - E-Farmbook</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
   <button class="back-btn" onclick="history.back()">← ย้อนกลับ</button>
 
   <div class="header">
-    <h1>📒 สมุดทะเบียนเกษตรกร</h1>
+    <h1>สมุดทะเบียนเกษตรกร</h1>
   </div>
 
   <div class="container">
@@ -55,7 +55,7 @@
       const farmerList = document.getElementById("farmerList");
       farmerList.innerHTML = data.map(f => `
         <div class="farmer-card" onclick="openDetails('${encodeURIComponent(JSON.stringify(f))}')">
-          <div class="card-avatar">
+          <div class="card-avatar" style="background-image: url('https://img5.pic.in.th/file/secure-sv1/avatar0f9d4863985b3a72.png')">
             ${f.image ? `<img src="${f.image}" alt="${f.name}">` : ""}
           </div>
           <div class="card-info">
@@ -77,7 +77,7 @@
     });
 
     loadFarmers();
-    setInterval(loadFarmers, 10000); // Refresh every 60 seconds
+    setInterval(loadFarmers, 1000); 
   </script>
 </body>
 </html>
