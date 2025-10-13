@@ -24,6 +24,7 @@
     <a href="add.html">➕<span>เพิ่มข้อมูล</span></a>
     <a href="track.html" class="active">📒<span>สมุดทะเบียน</span></a>
     <a href="profile.html">👤<span>ติดต่อเรา</span></a>
+    <a href="index.html">🚪<span>ออกจากระบบ</span></a>
   </div>
 
   <script>
@@ -47,7 +48,7 @@
       plantingDate: row.c[6]?.v || "-",
       harvestDate: row.c[7]?.v || "-",
       image: row.c[8]?.v || "image/default.jpg",
-      imagefarm: row.c[9]?.v || ""   // 🔥 เพิ่มบรรทัดนี้
+      imagefarm: row.c[9]?.v || ""   
       }));
 
       renderFarmers(farmerData);
