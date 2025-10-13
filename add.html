@@ -6,26 +6,28 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/th.js"></script>
 
   <style>
-    #previewContainer {
+    #previewContainer, #farmPreviewContainer {
       margin-top: 10px;
       text-align: center;
     }
-    #previewImage {
+    #previewImage, #farmPreviewImage {
       max-width: 150px;
       max-height: 150px;
       display: none;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
     }
-    /* สไตล์เพิ่มเติมเพื่อให้ flatpickr เข้ากับธีม */
-    .flatpickr-input {
-      background-color: white; /* ทำให้ input มีพื้นหลังสีขาวเหมือน input อื่นๆ */
+    .upload-section {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      background-color: #fafafa;
     }
   </style>
 </head>
@@ -38,40 +40,45 @@
 
   <div class="container">
     <form id="farmerForm">
-      <label for="name">ชื่อ - นามสกุล:</label>
+      <label for="name">ชื่อ - นามสกุล :</label>
       <input type="text" id="name" name="name" required>
 
-      <label for="address">ที่อยู่:</label>
+      <label for="address">ที่อยู่ :</label>
       <input type="text" id="address" name="address" required>
 
-      <label for="phone">เบอร์โทร:</label>
+      <label for="phone">เบอร์โทร :</label>
       <input type="text" id="phone" name="phone" required>
 
-      <label for="email">อีเมล:</label>
+      <label for="email">อีเมล :</label>
       <input type="email" id="email" name="email">
 
-      <label for="area">พื้นที่ปลูก (ไร่):</label>
+      <label for="area">พื้นที่ปลูก (ไร่) :</label>
       <input type="text" id="area" name="area" required>
 
-      <label for="cropType">ประเภทพืชที่ปลูก:</label>
+      <label for="cropType">ประเภทพืชที่ปลูก :</label>
       <input type="text" id="cropType" name="cropType" required>
 
-      <label for="plantingDate">วันที่ปลูก:</label>
+      <label for="plantingDate">วันที่ปลูก :</label>
       <input type="text" id="plantingDate" name="plantingDate" placeholder="เลือกวันที่..." required>
 
-      <label for="harvestDate">วันที่คาดว่าจะเก็บเกี่ยว:</label>
+      <label for="harvestDate">วันที่คาดว่าจะเก็บเกี่ยว :</label>
       <input type="text" id="harvestDate" name="harvestDate" placeholder="เลือกวันที่..." required>
 
-      <label for="imageUpload">แนบรูปภาพโปรไฟล์:</label>
-      <input type="file" id="imageUpload" name="filename" accept="image/*">
+      <label for="upload-section">รูปโปรไฟล์เกษตรกร :</label>
+      <div class="upload-section">
+        <input type="file" id="imageUpload" name="profileImage" accept="image/*">
+        <div id="previewContainer"><img id="previewImage" alt="Preview"></div>
+      </div>
 
-      <div id="previewContainer">
-        <img id="previewImage" src="" alt="Preview">
+      <label for="upload-section">รูปไร่ / สวน :</label>
+      <div class="upload-section">
+        <input type="file" id="farmImageUpload" name="farmImage" accept="image/*">
+        <div id="farmPreviewContainer"><img id="farmPreviewImage" alt="Farm Preview"></div>
       </div>
 
       <div id="uploadStatus" class="welcome-box"><p>ยังไม่ได้อัปโหลดรูป</p></div>
 
-      <button type="submit">บันทึกข้อมูล</button>
+      <button type="submit" id="uploadBtn">✅ ยืนยันการอัปโหลด</button>
     </form>
   </div>
 
@@ -83,50 +90,57 @@
   </div>
 
   <script>
-    // ✅ 3. เรียกใช้งาน flatpickr
     flatpickr("#plantingDate, #harvestDate", {
-      locale: "th", // ใช้ภาษาไทย
-      altInput: true, // สร้าง input ที่แสดงผลแยกต่างหาก
-      altFormat: "j F Y", // รูปแบบที่แสดงให้ผู้ใช้เห็น (วัน เดือน ปี พ.ศ.) e.g., 13 ตุลาคม 2568
-      dateFormat: "Y-m-d", // รูปแบบข้อมูลจริงที่จะถูกส่งไปกับฟอร์ม (สำคัญมาก!)
-      allowInput: true, // อนุญาตให้พิมพ์วันที่ได้
+      locale: "th",
+      altInput: true,
+      altFormat: "j F Y",
+      dateFormat: "Y-m-d",
+      allowInput: true,
     });
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbw5zZk0xxogrPbMSfYG6bPnSgCbMB2vrzfK6GEkhDkwfPM4XBLf3fhBgK8cp-qRwyjQ/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwTkVfcx9PkCNi8Jj1kxPbRBX7rZv1xgd3_ArjqYy_QUlcV5HR1hGlZRNlMKPf25-e0/exec";
+
     const uploadStatus = document.getElementById("uploadStatus");
     const previewImage = document.getElementById("previewImage");
+    const farmPreviewImage = document.getElementById("farmPreviewImage");
     const imageInput = document.getElementById("imageUpload");
+    const farmImageInput = document.getElementById("farmImageUpload");
 
-    imageInput.addEventListener("change", function () {
-      if (this.files && this.files[0]) {
+    function previewFile(input, previewElement) {
+      if (input.files && input.files[0]) {
         const reader = new FileReader();
         reader.onload = e => {
-          previewImage.src = e.target.result;
-          previewImage.style.display = "block";
+          previewElement.src = e.target.result;
+          previewElement.style.display = "block";
         };
-        reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(input.files[0]);
       } else {
-        previewImage.style.display = "none";
+        previewElement.style.display = "none";
       }
-    });
+    }
+
+    imageInput.addEventListener("change", () => previewFile(imageInput, previewImage));
+    farmImageInput.addEventListener("change", () => previewFile(farmImageInput, farmPreviewImage));
 
     document.getElementById("farmerForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       const form = e.target;
-      const fileInput = document.getElementById("imageUpload");
-      let imageBase64 = "", imageType = "";
+      uploadStatus.innerHTML = "<p style='color:yellow;'>⏳ กำลังอัปโหลด...</p>";
 
-      uploadStatus.innerHTML = "<p style='color:yellow;'>⏳ กำลังอัปโหลดข้อมูล...</p>";
-
-      if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        imageType = file.type;
-        const reader = new FileReader();
-        imageBase64 = await new Promise(resolve => {
-          reader.onload = () => resolve(reader.result);
-          reader.readAsDataURL(file);
-        });
+      async function encodeFile(input) {
+        if (input.files.length > 0) {
+          const file = input.files[0];
+          const reader = new FileReader();
+          return await new Promise(resolve => {
+            reader.onload = () => resolve({ base64: reader.result, type: file.type });
+            reader.readAsDataURL(file);
+          });
+        }
+        return { base64: "", type: "" };
       }
+
+      const profileImg = await encodeFile(imageInput);
+      const farmImg = await encodeFile(farmImageInput);
 
       const formData = new URLSearchParams();
       formData.append("name", form.name.value);
@@ -135,25 +149,24 @@
       formData.append("email", form.email.value);
       formData.append("area", form.area.value);
       formData.append("cropType", form.cropType.value);
-      // ข้อมูลวันที่ยังคงถูกดึงมาได้ตามปกติ เพราะ flatpickr จะอัปเดตค่าใน input เดิม
       formData.append("plantingDate", form.plantingDate.value);
       formData.append("harvestDate", form.harvestDate.value);
-      formData.append("imageBase64", imageBase64);
-      formData.append("imageType", imageType);
+      formData.append("imageBase64", profileImg.base64);
+      formData.append("imageType", profileImg.type);
+      formData.append("farmImageBase64", farmImg.base64);
+      formData.append("farmImageType", farmImg.type);
 
       try {
         const res = await fetch(scriptURL, { method: "POST", body: formData });
         const result = await res.json();
-
         if (result.status === "success") {
           uploadStatus.innerHTML = "<p style='color:#C9FF00;'>✅ อัปโหลดสำเร็จ!</p>";
           alert("บันทึกข้อมูลสำเร็จ!");
           form.reset();
           previewImage.style.display = "none";
-          // รีเซ็ตค่าใน flatpickr ด้วย
-          document.querySelectorAll(".flatpickr-input").forEach(input => input._flatpickr.clear());
+          farmPreviewImage.style.display = "none";
         } else {
-          uploadStatus.innerHTML = "<p style='color:red;'>❌ อัปโหลดล้มเหลว: " + result.message + "</p>";
+          uploadStatus.innerHTML = "<p style='color:red;'>❌ ล้มเหลว: " + result.message + "</p>";
         }
       } catch (err) {
         uploadStatus.innerHTML = "<p style='color:red;'>❌ เกิดข้อผิดพลาด: " + err.message + "</p>";

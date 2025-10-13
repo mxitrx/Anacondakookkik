@@ -138,6 +138,14 @@ button:hover {
   gap: 20px;
 }
 
+.farm-container {
+  display: flex;
+  flex-direction: column; /* จัดเรียงแนวตั้งสำหรับมือถือเป็นหลัก */
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
 .profile-pic-wrapper {
   flex-shrink: 0;
 }
@@ -291,3 +299,4 @@ button:hover {
   margin-top: 15px;
   text-align: center;
 }
+
