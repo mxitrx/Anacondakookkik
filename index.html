@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>หน้าหลัก - E-Farmbook</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    .quick-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 25px;
-    }
-    .quick-btn {
-      padding: 15px;
-      border-radius: 10px;
-      background: #c9ff00;
-      color: #171717;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .quick-btn:hover {
-      background: #171717;
-    }
-  </style>
+<meta charset="utf-8" />
+<title>เข้าสู่ระบบ - E-Farmbook</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+<style>
+.login-small { max-width: 420px; margin-top:10%;}
+.brand { text-align: center; margin-bottom: 12px; color: #C9FF00; }
+.alt-links { display:flex; gap:10px; justify-content:center; margin-top:12px; }
+.alt-links a { color:#fff; text-decoration:none; font-size:14px; }
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="welcome-box">
-      <h1>🌾 ยินดีต้อนรับสู่แอป Farmbook !</h1>
-      <p>จัดการข้อมูลเกษตรกรและติดตามผลการปลูกได้ง่ายๆ ในที่เดียว</p>
-    </div>
+<div class="container login-small">
+<h2 class="brand">E‑Farmbook — เข้าสู่ระบบ</h2>
 
-    <div class="quick-actions">
-      <a href="add.html" class="quick-btn">➕ เพิ่มข้อมูล</a>
-      <a href="track.html" class="quick-btn">📒 สมุดทะเบียน</a>
-      <a href="profile.html" class="quick-btn">👤 ติดต่อเรา</a>
-      
-    </div>
-  </div>
 
- 
+<form id="loginForm" onsubmit="return handleLogin(event)">
+<label for="username">ชื่อผู้ใช้</label>
+<input id="username" name="username" type="text" required placeholder="" />
 
-  <div class="navbar">
-    <a href="index.html" class="active">🏠<span>หน้าหลัก</span></a>
-    <a href="add.html">➕<span>เพิ่มข้อมูล</span></a>
-    <a href="track.html">📒<span>สมุดทะเบียน</span></a>
-    <a href="profile.html">👤<span>ติดต่อเรา</span></a>
-  </div>
 
-  <script src="script.js"></script>
+<label for="password">รหัสผ่าน</label>
+<input id="password" name="password" type="password" required placeholder="" />
+
+
+<button type="submit">เข้าสู่ระบบ</button>
+</form>
+
+
+<div class="alt-links">
+
+</div>
+</div>
+
+
+<script>
+// Simple demo login (client-side). Demo credentials: username=kookkik / password=kookkik
+function handleLogin(e){
+e.preventDefault();
+const u = document.getElementById('username').value.trim();
+const p = document.getElementById('password').value.trim();
+
+
+if(u === 'kookkik' && p === 'kookkik'){
+// store a simple session flag and redirect
+sessionStorage.setItem('efarm_user', u);
+window.location.href = 'home.html';
+} else {
+alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง\n(ลองใช้ kookkik / kookkik)');
+}
+return false;
+}
+</script>
 </body>
 </html>
