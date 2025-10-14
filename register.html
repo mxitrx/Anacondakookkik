@@ -32,53 +32,31 @@
   </div>
 
   <script>
-    // ✅ เปลี่ยน URL ตรงนี้ให้เป็น Web App URL ของคุณ
-    const scriptURL = "https://script.google.com/macros/s/AKfycbw1PoB7GF3d4fWiWeQ0JuTUDU12Iwhiyfkzch_X7rmpYjy5za68GfBbPdtrSTXazMed2w/exec";
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-    document.getElementById("registerForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  const formData = {
+    fullname: document.getElementById("fullname").value,
+    email: document.getElementById("email").value,
+    username: document.getElementById("username").value,
+    password: document.getElementById("password").value
+  };
 
-      const data = {
-        action: "register",
-        fullname: document.getElementById("fullname").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        username: document.getElementById("username").value.trim(),
-        password: document.getElementById("password").value.trim()
-      };
+  fetch("https://script.google.com/macros/s/AKfycbzVQEu366kiSitsiEz_WT_CXbg9OaQtrwMUp_3556F-l_P90_Sx863eWBU17sGB0ClQeQ/exec", {  // 👈 ใส่ URL ของคุณตรงนี้
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    alert("สมัครสมาชิกสำเร็จแล้ว!");
+    document.getElementById("registerForm").reset();
+  })
+  .catch(error => {
+    alert("เกิดข้อผิดพลาด: " + error);
+  });
+});
+</script>
 
-      if (!data.fullname || !data.email || !data.username || !data.password) {
-        alert("⚠️ กรุณากรอกข้อมูลให้ครบทุกช่อง");
-        return;
-      }
-
-      const button = e.target.querySelector("button");
-      button.disabled = true;
-      button.textContent = "กำลังสมัครสมาชิก...";
-
-      try {
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-
-        if (result.status === "success") {
-          alert("✅ สมัครสมาชิกสำเร็จ!");
-          document.getElementById("registerForm").reset();
-          window.location.href = "index.html";
-        } else {
-          alert("❌ " + result.message);
-        }
-
-      } catch (err) {
-        alert("🚫 การเชื่อมต่อมีปัญหา: " + err.message);
-      } finally {
-        button.disabled = false;
-        button.textContent = "สมัครสมาชิก";
-      }
-    });
-  </script>
 </body>
 </html>

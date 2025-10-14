@@ -20,36 +20,23 @@
     </p>
   </div>
 
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzfZ74X25IcqUTamvRtfmD10MnGSFQdPbegQ6D-vqH0scogfh7oN89-sXUQhj-2wEy6_Q/exec";
+<script>
+document.getElementById("forgotForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzVQEu366kiSitsiEz_WT_CXbg9OaQtrwMUp_3556F-l_P90_Sx863eWBU17sGB0ClQeQ/exec"; // 🔗 ใส่ URL ของ Apps Script
 
-      const emailValue = document.getElementById("email").value.trim();
-
-      if (!emailValue) {
-        alert("⚠️ กรุณากรอกอีเมล");
-        return;
-      }
-
-      const data = { action: "forgot", email: emailValue };
-
-      try {
-        await fetch(scriptURL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        alert("✅ ระบบได้รับคำขอแล้ว! กรุณาตรวจสอบข้อมูลใน Google Sheet หรืออีเมลของคุณ");
-        document.getElementById("forgotForm").reset();
-        window.location.href = "index.html";
-      } catch (err) {
-        alert("🚫 การเชื่อมต่อมีปัญหา: " + err.message);
-      }
+  fetch(`${scriptURL}?email=${encodeURIComponent(email)}`)
+    .then(response => response.text())
+    .then(password => {
+      alert("รหัสผ่านของคุณคือ: " + password);
+    })
+    .catch(error => {
+      alert("เกิดข้อผิดพลาด: " + error);
     });
-  </script>
+});
+</script>
+
 </body>
 </html>

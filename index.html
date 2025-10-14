@@ -28,56 +28,27 @@
   </div>
 
   <script>
-    // ❗️❗️❗️ วาง Web App URL ใหม่ของคุณที่ได้จากการ Deploy ที่นี่ ❗️❗️❗️
-    const scriptURL = "https://script.google.com/macros/s/AKfycbw1PoB7GF3d4fWiWeQ0JuTUDU12Iwhiyfkzch_X7rmpYjy5za68GfBbPdtrSTXazMed2w/exec";
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const loginButton = e.target.querySelector("button");
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwgMbKIILy6BKul5aULAWfS7DZD2gyPP0D9I31CvYMwjO2IVgn7T5jlJcL3W6sIeqjx9g/exec"; // 🔗 ใส่ URL ของ Apps Script
 
-      if (!username || !password) {
-        alert("⚠️ กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
-        return;
+  fetch(`${scriptURL}?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`)
+    .then(res => res.text())
+    .then(result => {
+      if (result === "success") {
+        alert("✅ เข้าสู่ระบบสำเร็จ!");
+        window.location.href = "home.html"; // จะไปหน้าหลัก (สร้างหน้า home.html ภายหลังได้)
+      } else {
+        alert("❌ ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
       }
-      
-      loginButton.disabled = true;
-      loginButton.textContent = "กำลังตรวจสอบ...";
+    })
+    .catch(err => alert("เกิดข้อผิดพลาด: " + err));
+});
+</script>
 
-      try {
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "login", username, password })
-        });
-
-        const result = await res.json();
-
-        if (result.status === "success") {
-          // 🎉 ล็อกอินสำเร็จ! result.userData จะมีข้อมูลทั้งหมด
-          alert(`✅ ยินดีต้อนรับคุณ ${result.userData.Fullname} (สถานะ: ${result.userData.Role})`);
-          
-          // (ตัวอย่าง) บันทึกข้อมูลผู้ใช้ลงใน localStorage เพื่อนำไปใช้หน้าอื่น
-          localStorage.setItem('currentUser', JSON.stringify(result.userData));
-          
-          // ไปยังหน้า home.html
-          window.location.href = "home.html"; 
-
-        } else {
-          // แสดงข้อความจากสคริปต์ กรณีชื่อผู้ใช้หรือรหัสผ่านผิด
-          alert(`❌ ${result.message}`);
-        }
-
-      } catch (err) {
-        alert("🚫 การเชื่อมต่อมีปัญหา: " + err.message);
-      } finally {
-        // คืนค่าปุ่มให้กดได้อีกครั้ง ไม่ว่าจะสำเร็จหรือล้มเหลว
-        loginButton.disabled = false;
-        loginButton.textContent = "เข้าสู่ระบบ";
-      }
-    });
-  </script>
 </body>
 </html>
