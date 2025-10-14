@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครสมาชิก - E-Farmbook</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container-login">
+    <h2>สมัครสมาชิก</h2>
+    <form id="registerForm">
+      <label>ชื่อ - นามสกุล</label>
+      <input type="text" id="fullname" placeholder="เช่น อนาคอนด้า กุ๊กกิ๊ก" required>
+
+      <label>อีเมล</label>
+      <input type="email" id="email" placeholder="เช่น Anacondakookkik@email.com" required>
+
+      <label>ชื่อผู้ใช้</label>
+      <input type="text" id="username" placeholder="เช่น Anacondakookkik" required>
+
+      <label>รหัสผ่าน</label>
+      <input type="password" id="password" placeholder="เช่น 151068" required>
+
+      <button type="submit">สมัครสมาชิก</button>
+    </form>
+    <p style="text-align:center; color:#fff; margin-top:15px;">
+      มีบัญชีแล้ว? <a href="index.html" style="color:#c9ff00;">เข้าสู่ระบบ</a>
+    </p>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbz-suNXLPQkU9BGxLK3AA5mUZK_cEyVHtFRsCianz1IfyiivafNr6vM-Hk9ZpKeDgyUqw/exec";
+
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = {
+        action: "register",
+        fullname: fullname.value,
+        email: email.value,
+        username: username.value,
+        password: password.value
+      };
+
+      try {
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+        const text = await res.text();
+        if (text === "success") {
+          alert("สมัครสมาชิกสำเร็จ!");
+          window.location.href = "index.html";
+        } else {
+          alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+        }
+      } catch (err) {
+        alert("การเชื่อมต่อมีปัญหา");
+      }
+    });
+  </script>
+</body>
+</html>
