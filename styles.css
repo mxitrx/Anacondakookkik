@@ -14,6 +14,24 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+.container-home {
+  max-width: 600px;
+  margin: 15% auto 80px;
+  background: #222222;
+  padding: 60px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.container-login {
+  max-width: 600px;
+  margin: 15% auto 80px;
+  background: #222222;
+  padding: 60px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .containerinfo {
   max-width: 100%;
   background: none;
@@ -116,6 +134,19 @@ button:hover {
   .container {
     width: 90%;
     margin: 10px auto 80px;
+    padding: 15px;
+  }
+
+  .container-home {
+    width: 90%;
+    margin: 60% auto 80px;
+    padding: 15px;
+
+  }
+
+  .container-login {
+    width: 90%;
+    margin: 60% auto 80px;
     padding: 15px;
   }
 
