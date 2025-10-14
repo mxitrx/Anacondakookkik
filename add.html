@@ -29,6 +29,35 @@
       margin-top: 10px;
       background-color: #fafafa;
     }
+
+    /* ✅ เพิ่มส่วนโหลด */
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-size: 1.2em;
+    }
+
+    .spinner {
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #c9ff00;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -90,6 +119,12 @@
     <a href="index.html">🚪<span>ออกจากระบบ</span></a>
   </div>
 
+  <!-- ✅ Overlay โหลด -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>กำลังบันทึกข้อมูล โปรดรอสักครู่...</p>
+  </div>
+
   <script>
     flatpickr("#plantingDate, #harvestDate", {
       locale: "th",
@@ -106,6 +141,7 @@
     const farmPreviewImage = document.getElementById("farmPreviewImage");
     const imageInput = document.getElementById("imageUpload");
     const farmImageInput = document.getElementById("farmImageUpload");
+    const overlay = document.getElementById("loadingOverlay");
 
     function previewFile(input, previewElement) {
       if (input.files && input.files[0]) {
@@ -125,6 +161,8 @@
 
     document.getElementById("farmerForm").addEventListener("submit", async function(e) {
       e.preventDefault();
+      overlay.style.display = "flex"; // ✅ แสดงโหลด
+
       const form = e.target;
       uploadStatus.innerHTML = "<p style='color:yellow;'>⏳ กำลังอัปโหลด...</p>";
 
@@ -160,6 +198,7 @@
       try {
         const res = await fetch(scriptURL, { method: "POST", body: formData });
         const result = await res.json();
+        overlay.style.display = "none"; // ✅ ซ่อนโหลด
         if (result.status === "success") {
           uploadStatus.innerHTML = "<p style='color:#C9FF00;'>✅ อัปโหลดสำเร็จ!</p>";
           alert("บันทึกข้อมูลสำเร็จ!");
@@ -170,6 +209,7 @@
           uploadStatus.innerHTML = "<p style='color:red;'>❌ ล้มเหลว: " + result.message + "</p>";
         }
       } catch (err) {
+        overlay.style.display = "none"; // ✅ ซ่อนโหลดแม้เกิด error
         uploadStatus.innerHTML = "<p style='color:red;'>❌ เกิดข้อผิดพลาด: " + err.message + "</p>";
       }
     });

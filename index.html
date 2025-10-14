@@ -4,8 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เข้าสู่ระบบ - E-Farmbook</title>
-  <!-- สมมติว่ามีไฟล์ styles.css อยู่ที่เดียวกับไฟล์นี้ -->
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* สไตล์วงกลมหมุน */
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-size: 1.2em;
+    }
+
+    .spinner {
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #c9ff00;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <div class="container-login">
@@ -27,28 +56,43 @@
     </p>
   </div>
 
+  <!-- Loading overlay -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>กำลังเข้าสู่ระบบ โปรดรอสักครู่...</p>
+  </div>
+
   <script>
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+  const form = document.getElementById("loginForm");
+  const overlay = document.getElementById("loadingOverlay");
 
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwgMbKIILy6BKul5aULAWfS7DZD2gyPP0D9I31CvYMwjO2IVgn7T5jlJcL3W6sIeqjx9g/exec"; // 🔗 ใส่ URL ของ Apps Script
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-  fetch(`${scriptURL}?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`)
-    .then(res => res.text())
-    .then(result => {
-      if (result === "success") {
-        alert("✅ เข้าสู่ระบบสำเร็จ!");
-        window.location.href = "home.html"; // จะไปหน้าหลัก (สร้างหน้า home.html ภายหลังได้)
-      } else {
-        alert("❌ ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
-      }
-    })
-    .catch(err => alert("เกิดข้อผิดพลาด: " + err));
-});
-</script>
+    // แสดง overlay ระหว่างโหลด
+    overlay.style.display = "flex";
 
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwgMbKIILy6BKul5aULAWfS7DZD2gyPP0D9I31CvYMwjO2IVgn7T5jlJcL3W6sIeqjx9g/exec";
+
+    fetch(`${scriptURL}?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`)
+      .then(res => res.text())
+      .then(result => {
+        overlay.style.display = "none"; // ซ่อนเมื่อโหลดเสร็จ
+        if (result === "success") {
+          alert("✅ เข้าสู่ระบบสำเร็จ!");
+          window.location.href = "home.html";
+        } else {
+          alert("❌ ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+        }
+      })
+      .catch(err => {
+        overlay.style.display = "none";
+        alert("เกิดข้อผิดพลาด: " + err);
+      });
+  });
+  </script>
 </body>
 </html>
