@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>สมัครสมาชิก - E-Farmbook</title>
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ✅ ส่วนโหลด */
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-size: 1.2em;
+    }
+
+    .spinner {
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #c9ff00;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <div class="container-login">
@@ -12,13 +43,13 @@
 
     <form id="registerForm">
       <label for="fullname">ชื่อ - นามสกุล</label>
-      <input type="text" id="fullname" placeholder="เช่น สมชาย ใจดี" required>
+      <input type="text" id="fullname" placeholder="เช่น อนาคอนด้า กุ๊กกิ๊ก" required>
 
       <label for="email">อีเมล</label>
-      <input type="email" id="email" placeholder="เช่น your@email.com" required>
+      <input type="email" id="email" placeholder="เช่น Anacondakookkik@email.com" required>
 
       <label for="username">ชื่อผู้ใช้</label>
-      <input type="text" id="username" placeholder="เช่น somchai01" required>
+      <input type="text" id="username" placeholder="เช่น Anacondakookkik" required>
 
       <label for="password">รหัสผ่าน</label>
       <input type="password" id="password" placeholder="อย่างน้อย 6 ตัวอักษร" required>
@@ -31,32 +62,43 @@
     </p>
   </div>
 
+  <!-- ✅ Overlay โหลด -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>กำลังสมัครสมาชิก โปรดรอสักครู่...</p>
+  </div>
+
   <script>
-document.getElementById("registerForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+    const form = document.getElementById("registerForm");
+    const overlay = document.getElementById("loadingOverlay");
 
-  const formData = {
-    fullname: document.getElementById("fullname").value,
-    email: document.getElementById("email").value,
-    username: document.getElementById("username").value,
-    password: document.getElementById("password").value
-  };
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      overlay.style.display = "flex"; // ✅ แสดงวงกลมโหลด
 
-  fetch("https://script.google.com/macros/s/AKfycbzVQEu366kiSitsiEz_WT_CXbg9OaQtrwMUp_3556F-l_P90_Sx863eWBU17sGB0ClQeQ/exec", {  // 👈 ใส่ URL ของคุณตรงนี้
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData)
-  })
-  .then(() => {
-    alert("สมัครสมาชิกสำเร็จแล้ว!");
-    document.getElementById("registerForm").reset();
-  })
-  .catch(error => {
-    alert("เกิดข้อผิดพลาด: " + error);
-  });
-});
-</script>
+      const formData = {
+        fullname: document.getElementById("fullname").value,
+        email: document.getElementById("email").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+      };
 
+      fetch("https://script.google.com/macros/s/AKfycbzVQEu366kiSitsiEz_WT_CXbg9OaQtrwMUp_3556F-l_P90_Sx863eWBU17sGB0ClQeQ/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        overlay.style.display = "none"; // ✅ ซ่อนโหลด
+        alert("✅ สมัครสมาชิกสำเร็จแล้ว!");
+        form.reset();
+      })
+      .catch(error => {
+        overlay.style.display = "none"; // ✅ ซ่อนโหลดแม้เกิด error
+        alert("❌ เกิดข้อผิดพลาด: " + error);
+      });
+    });
+  </script>
 </body>
 </html>
