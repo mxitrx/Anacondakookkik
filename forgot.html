@@ -11,37 +11,43 @@
     <h2>ลืมรหัสผ่าน</h2>
     <form id="forgotForm">
       <label>กรอกอีเมลที่ใช้สมัคร</label>
-      <input type="email" id="email" placeholder="เช่น Anacondakookkik@email.com" required>
-
+      <input type="email" id="email" placeholder="เช่น your@email.com" required>
       <button type="submit">ดึงรหัสผ่าน</button>
     </form>
+
     <p style="text-align:center; color:#fff; margin-top:15px;">
       <a href="index.html" style="color:#c9ff00;">กลับไปหน้าเข้าสู่ระบบ</a>
     </p>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbz-suNXLPQkU9BGxLK3AA5mUZK_cEyVHtFRsCianz1IfyiivafNr6vM-Hk9ZpKeDgyUqw/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzfZ74X25IcqUTamvRtfmD10MnGSFQdPbegQ6D-vqH0scogfh7oN89-sXUQhj-2wEy6_Q/exec";
 
     document.getElementById("forgotForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const emailValue = email.value.trim();
+
+      const emailValue = document.getElementById("email").value.trim();
+
+      if (!emailValue) {
+        alert("⚠️ กรุณากรอกอีเมล");
+        return;
+      }
+
       const data = { action: "forgot", email: emailValue };
 
       try {
-        const res = await fetch(scriptURL, {
+        await fetch(scriptURL, {
           method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
-        const text = await res.text();
 
-        if (text === "notfound") {
-          alert("ไม่พบอีเมลนี้ในระบบ");
-        } else {
-          alert("รหัสผ่านของคุณคือ: " + text);
-        }
+        alert("✅ ระบบได้รับคำขอแล้ว! กรุณาตรวจสอบข้อมูลใน Google Sheet หรืออีเมลของคุณ");
+        document.getElementById("forgotForm").reset();
+        window.location.href = "index.html";
       } catch (err) {
-        alert("เกิดข้อผิดพลาดในการเชื่อมต่อ");
+        alert("🚫 การเชื่อมต่อมีปัญหา: " + err.message);
       }
     });
   </script>

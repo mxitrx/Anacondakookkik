@@ -9,53 +9,74 @@
 <body>
   <div class="container-login">
     <h2>สมัครสมาชิก</h2>
+
     <form id="registerForm">
-      <label>ชื่อ - นามสกุล</label>
-      <input type="text" id="fullname" placeholder="เช่น อนาคอนด้า กุ๊กกิ๊ก" required>
+      <label for="fullname">ชื่อ - นามสกุล</label>
+      <input type="text" id="fullname" placeholder="เช่น สมชาย ใจดี" required>
 
-      <label>อีเมล</label>
-      <input type="email" id="email" placeholder="เช่น Anacondakookkik@email.com" required>
+      <label for="email">อีเมล</label>
+      <input type="email" id="email" placeholder="เช่น your@email.com" required>
 
-      <label>ชื่อผู้ใช้</label>
-      <input type="text" id="username" placeholder="เช่น Anacondakookkik" required>
+      <label for="username">ชื่อผู้ใช้</label>
+      <input type="text" id="username" placeholder="เช่น somchai01" required>
 
-      <label>รหัสผ่าน</label>
-      <input type="password" id="password" placeholder="เช่น 151068" required>
+      <label for="password">รหัสผ่าน</label>
+      <input type="password" id="password" placeholder="อย่างน้อย 6 ตัวอักษร" required>
 
       <button type="submit">สมัครสมาชิก</button>
     </form>
+
     <p style="text-align:center; color:#fff; margin-top:15px;">
       มีบัญชีแล้ว? <a href="index.html" style="color:#c9ff00;">เข้าสู่ระบบ</a>
     </p>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbz-suNXLPQkU9BGxLK3AA5mUZK_cEyVHtFRsCianz1IfyiivafNr6vM-Hk9ZpKeDgyUqw/exec";
+    // ✅ เปลี่ยน URL ตรงนี้ให้เป็น Web App URL ของคุณ
+    const scriptURL = "https://script.google.com/macros/s/AKfycbw1PoB7GF3d4fWiWeQ0JuTUDU12Iwhiyfkzch_X7rmpYjy5za68GfBbPdtrSTXazMed2w/exec";
 
     document.getElementById("registerForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+
       const data = {
         action: "register",
-        fullname: fullname.value,
-        email: email.value,
-        username: username.value,
-        password: password.value
+        fullname: document.getElementById("fullname").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        username: document.getElementById("username").value.trim(),
+        password: document.getElementById("password").value.trim()
       };
+
+      if (!data.fullname || !data.email || !data.username || !data.password) {
+        alert("⚠️ กรุณากรอกข้อมูลให้ครบทุกช่อง");
+        return;
+      }
+
+      const button = e.target.querySelector("button");
+      button.disabled = true;
+      button.textContent = "กำลังสมัครสมาชิก...";
 
       try {
         const res = await fetch(scriptURL, {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
-        const text = await res.text();
-        if (text === "success") {
-          alert("สมัครสมาชิกสำเร็จ!");
+
+        const result = await res.json();
+
+        if (result.status === "success") {
+          alert("✅ สมัครสมาชิกสำเร็จ!");
+          document.getElementById("registerForm").reset();
           window.location.href = "index.html";
         } else {
-          alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+          alert("❌ " + result.message);
         }
+
       } catch (err) {
-        alert("การเชื่อมต่อมีปัญหา");
+        alert("🚫 การเชื่อมต่อมีปัญหา: " + err.message);
+      } finally {
+        button.disabled = false;
+        button.textContent = "สมัครสมาชิก";
       }
     });
   </script>

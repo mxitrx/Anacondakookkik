@@ -1,154 +1,83 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เข้าสู่ระบบ - E-Farmbook</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet" />
-  <style>
-    .login-small {
-      max-width: 420px;
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 12px;
-      color: #c9ff00;
-    }
-
-    .alt-links {
-      display: flex;
-      gap: 5px;
-      justify-content: center;
-      align-items: center;
-      margin-top: 15px;
-    }
-
-    .alt-links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1em;
-      transition: 0.3s;
-    }
-
-    .alt-links a:hover {
-      color: #c9ff00;
-    }
-
-    body {
-      margin: auto;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      overflow: auto;
-      background: linear-gradient(315deg, rgba(101, 0, 94, 1) 3%, rgba(60, 132, 206, 1) 38%, rgba(48, 238, 226, 1) 68%, #c9ff00 98%);
-      animation: gradient 15s ease infinite;
-      background-size: 400% 400%;
-      background-attachment: fixed;
-    }
-
-    @keyframes gradient {
-      0% {
-        background-position: 0% 0%;
-      }
-
-      50% {
-        background-position: 100% 100%;
-      }
-
-      100% {
-        background-position: 0% 0%;
-      }
-    }
-
-    .wave {
-      background: rgb(255 255 255 / 25%);
-      border-radius: 1000% 1000% 0 0;
-      position: fixed;
-      width: 200%;
-      height: 12em;
-      animation: wave 10s -3s linear infinite;
-      transform: translate3d(0, 0, 0);
-      opacity: 0.8;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    .wave:nth-of-type(2) {
-      bottom: -1.25em;
-      animation: wave 18s linear reverse infinite;
-      opacity: 0.8;
-    }
-
-    .wave:nth-of-type(3) {
-      bottom: -2.5em;
-      animation: wave 20s -1s reverse infinite;
-      opacity: 0.9;
-    }
-
-    @keyframes wave {
-      2% {
-        transform: translateX(1);
-      }
-
-      25% {
-        transform: translateX(-25%);
-      }
-
-      50% {
-        transform: translateX(-50%);
-      }
-
-      75% {
-        transform: translateX(-25%);
-      }
-
-      100% {
-        transform: translateX(1);
-      }
-    }
-  </style>
+  <!-- สมมติว่ามีไฟล์ styles.css อยู่ที่เดียวกับไฟล์นี้ -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <div class="container-login login-small">
-    <h2 class="brand">E-Farmbook — เข้าสู่ระบบ</h2>
+  <div class="container-login">
+    <h2>เข้าสู่ระบบ</h2>
 
-    <form id="loginForm" onsubmit="return handleLogin(event)">
+    <form id="loginForm">
       <label for="username">ชื่อผู้ใช้</label>
-      <input id="username" name="username" type="text" required placeholder>
+      <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้" required>
 
       <label for="password">รหัสผ่าน</label>
-      <input id="password" name="password" type="password" required placeholder>
+      <input type="password" id="password" placeholder="กรอกรหัสผ่าน" required>
 
       <button type="submit">เข้าสู่ระบบ</button>
     </form>
 
-    <div class="alt-links">
-      <a href="register.html">สมัครสมาชิก</a>   <a href="forgot.html">ลืมรหัสผ่าน</a>
-    </div>
+    <p style="text-align:center; color:#fff; margin-top:15px;">
+      <a href="register.html" style="color:#c9ff00;">สมัครสมาชิก</a> |
+      <a href="forgot.html" style="color:#c9ff00;">ลืมรหัสผ่าน</a>
+    </p>
   </div>
 
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
-
   <script>
-    // Simple demo login (client-side)
-    function handleLogin(e) {
-      e.preventDefault();
-      const u = document.getElementById("username").value.trim();
-      const p = document.getElementById("password").value.trim();
+    // ❗️❗️❗️ วาง Web App URL ใหม่ของคุณที่ได้จากการ Deploy ที่นี่ ❗️❗️❗️
+    const scriptURL = "https://script.google.com/macros/s/AKfycbw1PoB7GF3d4fWiWeQ0JuTUDU12Iwhiyfkzch_X7rmpYjy5za68GfBbPdtrSTXazMed2w/exec";
 
-      if (u === "kookkik" && p === "kookkik") {
-        sessionStorage.setItem("efarm_user", u);
-        window.location.href = "home.html";
-      } else {
-        alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง\n(ลองใช้ kookkik / kookkik)");
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const loginButton = e.target.querySelector("button");
+
+      if (!username || !password) {
+        alert("⚠️ กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
+        return;
       }
-      return false;
-    }
+      
+      loginButton.disabled = true;
+      loginButton.textContent = "กำลังตรวจสอบ...";
+
+      try {
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "login", username, password })
+        });
+
+        const result = await res.json();
+
+        if (result.status === "success") {
+          // 🎉 ล็อกอินสำเร็จ! result.userData จะมีข้อมูลทั้งหมด
+          alert(`✅ ยินดีต้อนรับคุณ ${result.userData.Fullname} (สถานะ: ${result.userData.Role})`);
+          
+          // (ตัวอย่าง) บันทึกข้อมูลผู้ใช้ลงใน localStorage เพื่อนำไปใช้หน้าอื่น
+          localStorage.setItem('currentUser', JSON.stringify(result.userData));
+          
+          // ไปยังหน้า home.html
+          window.location.href = "home.html"; 
+
+        } else {
+          // แสดงข้อความจากสคริปต์ กรณีชื่อผู้ใช้หรือรหัสผ่านผิด
+          alert(`❌ ${result.message}`);
+        }
+
+      } catch (err) {
+        alert("🚫 การเชื่อมต่อมีปัญหา: " + err.message);
+      } finally {
+        // คืนค่าปุ่มให้กดได้อีกครั้ง ไม่ว่าจะสำเร็จหรือล้มเหลว
+        loginButton.disabled = false;
+        loginButton.textContent = "เข้าสู่ระบบ";
+      }
+    });
   </script>
 </body>
 </html>
