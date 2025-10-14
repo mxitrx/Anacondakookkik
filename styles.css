@@ -86,6 +86,7 @@ button:hover {
 
 #farmerList {
   margin-top: 20px;
+  color: #c9ff00;
 }
 
 .card {
@@ -240,7 +241,7 @@ button:hover {
 .farmer-card {
   display: flex;
   align-items: center;
-  background-color: #f0f4f8;
+  background-color: #171717;
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 15px;
@@ -267,7 +268,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border: 2px solid #fff;
+  border: 2px solid #c9ff00;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -286,7 +287,7 @@ button:hover {
 .card-info p {
   margin: 4px 0;
   font-size: 0.95em;
-  color: #555;
+  color: #fff;
   line-height: 1.5;
 }
 
@@ -347,3 +348,4 @@ form input:focus {
   box-shadow: 0 0 10px rgba(201, 255, 0, 0.3);
   outline: none;
 }
+
