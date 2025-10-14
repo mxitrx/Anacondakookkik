@@ -5,33 +5,18 @@ body {
   padding: 0;
 }
 
-.container {
-  max-width: 600px;
-  margin: 20px auto 80px;
-  background: #222222;
-  padding: 60px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.container-home {
-  max-width: 600px;
-  margin: 10% auto 80px;
-  background: #222222;
-  padding: 60px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
+.container,
+.container-home,
 .container-login {
   max-width: 600px;
   margin: 10% auto 80px;
-  background: #222222;
+  background: #222;
   padding: 60px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+.container { margin-top: 20px; }
 .containerinfo {
   max-width: 100%;
   background: none;
@@ -39,32 +24,40 @@ body {
   border-radius: 15px;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
   color: #c9ff00;
 }
 
 h2 {
-  text-align: center;
-  color: #c9ff00;
   margin-bottom: 20px;
   font-size: 24px;
 }
 
 form label {
   display: block;
-  margin-top: 10px;
+  margin-top: 15px;
   font-weight: bold;
   color: #c9ff00;
+  text-transform: uppercase;
+  font-size: 0.9em;
 }
 
 form input {
   width: 95%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 8px;
-  border: 1px solid #fff;
-  color: #222222;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+form input:focus {
+  border-color: #c9ff00;
+  box-shadow: 0 0 10px rgba(201, 255, 0, 0.3);
+  outline: none;
 }
 
 button {
@@ -80,14 +73,9 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
-  background: #c9ff00;
-}
+button:hover { background: #c9ff00; }
 
-#farmerList {
-  margin-top: 20px;
-  color: #c9ff00;
-}
+#farmerList { margin-top: 20px; color: #c9ff00; }
 
 .card {
   background: #f6f6f6;
@@ -105,7 +93,7 @@ button:hover {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #222222;
+  background: #222;
   z-index: 999;
 }
 
@@ -121,55 +109,22 @@ button:hover {
   padding: 5px 0;
 }
 
-.navbar a span {
-  font-size: 12px;
-}
+.navbar a span { font-size: 12px; }
+.navbar a.active, .navbar a:hover { color: #c9ff00; }
 
-.navbar a.active,
-.navbar a:hover {
-  color: #c9ff00;
-}
-
-/* ✅ Responsive */
+/* Responsive */
 @media (max-width: 768px) {
-  .container {
+  .container, .container-home, .container-login {
     width: 90%;
-    margin: 10px auto 80px;
+    margin: 10% auto 80px;
     padding: 15px;
   }
 
-  .container-home {
-    width: 90%;
-    margin: 60% auto 80px;
-    padding: 15px;
-
-  }
-
-  .container-login {
-    width: 90%;
-    margin: 50% auto 80px;
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 20px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 10px;
-  }
+  h1 { font-size: 20px; }
+  button { font-size: 14px; padding: 10px; }
 }
 
-.profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 20px;
-}
-
-.farm-container {
+.profile-container, .farm-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,23 +139,21 @@ button:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-pic-wrapper {
-  flex-shrink: 0;
-}
+.profile-pic-wrapper { flex-shrink: 0; }
 
 .profile-pic {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--primary-color, #c9ff00);
+  border: 4px solid #c9ff00;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-info h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   font-size: 1.5em;
-  color: var(--primary-color, #c9ff00);
+  color: #c9ff00;
   font-weight: bold;
 }
 
@@ -214,11 +167,7 @@ button:hover {
 }
 
 @media (min-width: 576px) {
-  .profile-container {
-    flex-direction: row;
-    text-align: left;
-    align-items: flex-start;
-  }
+  .profile-container { flex-direction: row; text-align: left; align-items: flex-start; }
 }
 
 .search-input {
@@ -227,15 +176,15 @@ button:hover {
   padding: 12px;
   margin-bottom: 25px;
   border-radius: 8px;
-  border: 1px solid var(--border-color);
-  font-family: var(--font-family);
-  font-size: 1em;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
 }
 
 .search-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
+  border-color: #c9ff00;
   box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+  outline: none;
 }
 
 .farmer-card {
@@ -264,12 +213,8 @@ button:hover {
   background-position: center;
   margin-right: 20px;
   flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   border: 2px solid #c9ff00;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .card-avatar img {
@@ -279,8 +224,8 @@ button:hover {
 }
 
 .card-info h3 {
-  margin: 0 0 8px 0;
-  color: var(--secondary-color);
+  margin: 0 0 8px;
+  color: #c9ff00;
   font-size: 1.2em;
 }
 
@@ -292,7 +237,6 @@ button:hover {
 }
 
 .back-btn {
-  position: static;
   width: 105px;
   font-family: "Sarabun", sans-serif;
 }
@@ -306,15 +250,11 @@ button:hover {
   font-weight: bold;
 }
 
-.welcome-box p {
-  color: #fff;
-  font-size: 18px;
-}
+.welcome-box p { color: #fff; font-size: 18px; }
 
 #previewImage {
   max-width: 200px;
   max-height: 200px;
-  text-align: center;
   object-fit: cover;
 }
 
@@ -322,30 +262,3 @@ button:hover {
   margin-top: 15px;
   text-align: center;
 }
-
-/* Forms */
-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #c9ff00;
-  text-transform: uppercase;
-  font-size: 0.9em;
-}
-
-form input {
-  padding: 12px;
-  margin-top: 6px;
-  border-radius: 10px;
-  border: 1px solid #444;
-  background: #111;
-  color: #fff;
-  transition: all 0.2s ease-in-out;
-}
-
-form input:focus {
-  border-color: #c9ff00;
-  box-shadow: 0 0 10px rgba(201, 255, 0, 0.3);
-  outline: none;
-}
-
